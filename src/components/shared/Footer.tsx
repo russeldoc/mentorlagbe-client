@@ -1,16 +1,7 @@
 import Link from "next/link";
-import { cacheLife } from "next/cache";
 import { GraduationCap, Mail, Phone, MapPin } from "lucide-react";
 
-async function getCurrentYear() {
-    "use cache";
-    cacheLife("max");
-    return new Date().getFullYear();
-}
-
-export default async function Footer() {
-    const currentYear = await getCurrentYear();
-
+export default function Footer() {
     return (
         <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -71,7 +62,7 @@ export default async function Footer() {
             </div>
 
             <div className="border-t border-slate-200 dark:border-slate-800 py-5 text-center text-xs">
-                © {currentYear} MentorLagbe. All rights reserved.
+                © {new Date().getFullYear()} MentorLagbe. All rights reserved.
             </div>
         </footer>
     );
