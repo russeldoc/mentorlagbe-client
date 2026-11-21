@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/providers/AuthProvider";
 
 export default function SignInPage() {
-    const { loginWithBackendSync } = useAuth();
+    const { login } = useAuth();
     const router = useRouter();
 
     const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ export default function SignInPage() {
 
         setSubmitting(true);
         try {
-            const syncedUser = await loginWithBackendSync({ email: email.trim() });
+            const syncedUser = await login(email.trim(), password);
             toast.success(`Welcome back, ${syncedUser.name}!`);
             if (syncedUser.role === "admin") router.push("/dashboard/admin");
             else if (syncedUser.role === "tutor") router.push("/dashboard/tutor");
