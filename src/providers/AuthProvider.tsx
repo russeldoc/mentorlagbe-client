@@ -10,13 +10,12 @@ interface AuthContextValue {
     loading: boolean;
     darkMode: boolean;
     toggleDarkMode: () => void;
-    loginWithBackendSync: (payload: {
+    login: (email: string, password: string) => Promise<UserProfile>;
+    register: (payload: {
+        name: string;
         email: string;
-        name?: string;
-        role?: UserRole;
-        image?: string;
-        phone?: string;
-        bio?: string;
+        password: string;
+        role: UserRole;
     }) => Promise<UserProfile>;
     refreshUser: () => Promise<void>;
     logout: () => void;
@@ -99,16 +98,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         };
     }, []);
 
-    const loginWithBackendSync = useCallback(
+    const login = useCallback(async (email: string, password: string): Promise<UserProfile> => {
+        const res = await api.post("/auth-session/login", { email, password });
+        const { token: jwtToken, user: syncedUser } = res.data;
+        setAuthToken(jwtToken);
+        setToken(jwtToken);
+        setUser(syncedUser);
+        localStorage.setItem(USER_CACHE_KEY, JSON.stringify(syncedUser));
+        return syncedUser;
+    }, []);
+
+    const register = useCallback(
         async (payload: {
+            name: string;
             email: string;
-            name?: string;
-            role?: UserRole;
-            image?: string;
-            phone?: string;
-            bio?: string;
+            password: string;
+            role: UserRole;
         }): Promise<UserProfile> => {
-            const res = await api.post("/auth-session/jwt-sync", payload);
+            const res = await api.post("/auth-session/register", payload);
             const { token: jwtToken, user: syncedUser } = res.data;
             setAuthToken(jwtToken);
             setToken(jwtToken);
@@ -144,7 +151,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 loading,
                 darkMode,
                 toggleDarkMode,
-                loginWithBackendSync,
+                login,
+                register,
                 refreshUser,
                 logout,
             }}
