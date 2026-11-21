@@ -52,6 +52,7 @@ export default function PricingPage() {
                         <h2 className="text-2xl font-bold">Pro Student</h2>
                         <p className="text-4xl font-extrabold text-brand-600">$10</p>
                         <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                            <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Unlimited tuition applications (Free plan allows 1)</li>
                             <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Priority booking & application visibility</li>
                             <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Unlimited saved tuition bookmarks</li>
                             <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Pro badge on student profile</li>

@@ -116,7 +116,7 @@ export default function HomePage() {
                         Simple Free & Pro Plans
                     </h2>
                     <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                        Start free or unlock unlimited tuition posts and priority student booking with Stripe.
+                        Start free or unlock unlimited tuition applications and posts with Stripe.
                     </p>
                 </div>
 
@@ -125,6 +125,7 @@ export default function HomePage() {
                         <h3 className="text-lg font-bold">Pro Student Plan</h3>
                         <p className="text-3xl font-extrabold text-brand-600">$10 <span className="text-xs font-normal text-slate-500">one-time / upgrade</span></p>
                         <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                            <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Unlimited tuition applications (Free plan allows 1)</li>
                             <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Priority application & booking support</li>
                             <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Unlimited saved tuition bookmarks</li>
                         </ul>
