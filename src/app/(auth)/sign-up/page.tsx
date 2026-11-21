@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/providers/AuthProvider";
 
 export default function SignUpPage() {
-    const { loginWithBackendSync } = useAuth();
+    const { register } = useAuth();
     const router = useRouter();
 
     const [name, setName] = useState("");
@@ -26,9 +26,10 @@ export default function SignUpPage() {
 
         setSubmitting(true);
         try {
-            const created = await loginWithBackendSync({
+            const created = await register({
                 name: name.trim(),
                 email: email.trim(),
+                password,
                 role,
             });
             toast.success(`Account created as ${created.role} (Free plan)!`);
