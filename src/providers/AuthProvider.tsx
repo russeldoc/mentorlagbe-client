@@ -79,9 +79,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     setUser(res.data.user);
                     localStorage.setItem(USER_CACHE_KEY, JSON.stringify(res.data.user));
                 }
-            } catch {
+            } catch (err: unknown) {
+                const status = (err as { response?: { status?: number } })?.response?.status;
                 // Only clear session if token is genuinely unauthorized (401)
-                if (active) {
+                if (active && status === 401) {
                     setAuthToken(null);
                     setToken(null);
                     setUser(null);
